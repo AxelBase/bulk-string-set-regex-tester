@@ -40,7 +40,10 @@
   }
 </script>
 
-<link rel="stylesheet" href="{base}/bootstrap.min.css" />
+<svelte:head>
+  <link rel="stylesheet" href="{base}/bootstrap.min.css" />
+  <script src="{base}/bootstrap.bundle.min.js"></script>
+</svelte:head>
 
 <header class="fixed-top p-3 w-100" style="pointer-events: none; z-index: 1040;">
   <nav class="container glass rounded-pill px-4 py-2 d-flex justify-content-between align-items-center shadow-sm"
@@ -55,7 +58,7 @@
       </a>
 
       <div class="position-relative ms-2 ms-md-3" use:clickOutside on:click_outside={closeDropdown}>
-        <button class="btn btn-coffee d-flex align-items-center gap-2" on:click={toggleDropdown}>
+        <button class="btn btn-coffee d-flex align-items-center gap-2" on:click={toggleDropdown} aria-label="Support this project">
           <svg class="coffee-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12.35,22.2L12,22A10,10,0,0,1,2,12V10A2,2,0,0,1,4,8H7.2A5.13,5.13,0,0,1,12,3A5.13,5.13,0,0,1,16.8,8H20A2,2,0,0,1,22,10V12A10,10,0,0,1,12.35,22.2M4,10V12A8,8,0,0,0,12,20A8,8,0,0,0,20,12V10H16.8A5.11,5.11,0,0,1,12.5,5.12A5.15,5.15,0,0,1,7.2,10H4Z"/>
           </svg>
@@ -99,14 +102,13 @@
         </button>
 
         <button 
-            class="navbar-toggler d-lg-none border-0 bg-transparent p-0 ms-2" 
-            type="button" 
-            on:click={toggleSidebar}
-            aria-label="Toggle sidebar menu" 
+          class="navbar-toggler d-lg-none border-0 bg-transparent p-0 ms-2" 
+          type="button"
+          aria-label="Toggle mobile navigation menu"
         >
-            <i class="bi bi-grid-fill fs-2" style="color: var(--axel-blue);"></i>
+             <i class="bi bi-grid-fill fs-2" style="color: var(--axel-blue);"></i>
         </button>
-      </div>
+    </div>
 
   </nav>
 </header>
@@ -115,7 +117,7 @@
   <slot />
 </main>
 
-<footer class="fixed-bottom p-3" style="pointer-events: none; z-index: 1030;">
+<footer class="releative p-3" style="pointer-events: none; z-index: 1030;">
     <div class="container glass rounded-pill px-4 py-2 d-flex flex-column flex-sm-row justify-content-between align-items-center shadow-sm small text-muted"
          style="pointer-events: auto; max-width: 900px;">
         <span>&copy; {new Date().getFullYear()} AxelBase Regex Tester</span>

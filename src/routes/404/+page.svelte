@@ -27,7 +27,7 @@
     </h1>
 
     <p class="lead text-muted mb-5">
-      The URL <code class="bg-light px-2 py-1 rounded">{$page.url.pathname}</code> doesn't match any regex in our system.
+      The URL doesn't match any regex in our system.
     </p>
 
     <div class="bg-light border rounded-3 p-5 mb-5">
@@ -81,12 +81,7 @@
   .breadcrumbs a:hover {
     text-decoration: underline;
   }
-  code {
-    font-size: 0.9em;
-    background: #f1f3f5;
-    padding: 0.2em 0.4em;
-    border-radius: 4px;
-  }
+
   .max-w-400 {
     max-width: 400px;
   }
