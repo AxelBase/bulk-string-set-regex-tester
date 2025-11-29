@@ -1,0 +1,229 @@
+/* app.css */
+
+/* --- Variables (Light Mode Default) --- */
+:root {
+  /* Gentian Blue Palette */
+  --axel-blue: #0E294B;
+  --axel-blue-light: #1A3C66;
+  --axel-blue-lighter: #2c5282;
+  
+  /* Theme Colors */
+  --primary-bg: #f8fbff;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.9);
+  --glass-shadow: 0 8px 32px 0 rgba(14, 41, 75, 0.1);
+  
+  --color-text-main: #0E294B;
+  --color-text-muted: #546e7a;
+  --color-accent: #0E294B;
+  --color-accent-hover: #1A3C66;
+  
+  --input-bg: rgba(255, 255, 255, 0.95);
+  --blob-color-1: #e1effe;
+  --blob-color-2: #dbeafe;
+
+  --radius-bubble: 24px;
+  
+  /* Bootstrap overrides */
+  --bs-body-bg: var(--primary-bg);
+  --bs-body-color: var(--color-text-main);
+}
+
+/* --- Dark Mode Overrides --- */
+[data-bs-theme="dark"] {
+  /* Dark mode uses the Gentian Blue as the deep background */
+  --primary-bg: #0b2240; 
+  --glass-bg: rgba(14, 41, 75, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  
+  --color-text-main: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-accent: #63b3ed; /* Lighter blue for visibility on dark */
+  --color-accent-hover: #4299e1;
+  
+  --input-bg: rgba(11, 34, 64, 0.6);
+  --blob-color-1: #1a365d;
+  --blob-color-2: #0E294B;
+}
+
+/* --- Global & Reset --- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: var(--primary-bg);
+  color: var(--color-text-main);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  overflow-x: hidden;
+  padding-top: 100px; /* Space for fixed nav */
+  padding-bottom: 80px; /* Space for footer */
+}
+
+/* --- Animated Background Blobs --- */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  width: 70vw;
+  height: 70vw;
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(90px);
+  opacity: 0.5;
+  animation: floatBlob 25s infinite alternate ease-in-out;
+  transition: background-color 0.5s ease;
+}
+
+body::before {
+  background: var(--blob-color-1);
+  top: -20%;
+  left: -20%;
+}
+
+body::after {
+  background: var(--blob-color-2);
+  bottom: -20%;
+  right: -20%;
+  animation-delay: -12s;
+}
+
+@keyframes floatBlob {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(40px, 40px) scale(1.05); }
+}
+
+/* --- Glassmorphism Utilities --- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-bubble);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Form Controls & Inputs --- */
+.form-control, .form-select {
+  background-color: var(--input-bg) !important;
+  border: 2px solid var(--glass-border) !important;
+  color: var(--color-text-main) !important;
+  border-radius: 16px;
+  padding: 0.8rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-control:focus {
+  background-color: var(--input-bg) !important;
+  box-shadow: 0 0 0 4px rgba(14, 41, 75, 0.15);
+  border-color: var(--axel-blue) !important;
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4, h5 {
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--color-text-main);
+}
+
+.text-muted {
+  color: var(--color-text-muted) !important;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--axel-blue), #4299e1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* Ensure gradient works in dark mode */
+[data-bs-theme="dark"] .text-gradient {
+    background: linear-gradient(135deg, #fff, #63b3ed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-accent);
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+code {
+  background: rgba(14, 41, 75, 0.08);
+  color: var(--color-text-main);
+  padding: 0.2em 0.4em;
+  border-radius: 6px;
+}
+[data-bs-theme="dark"] code {
+    background: rgba(255,255,255,0.1);
+}
+
+/* --- Buttons --- */
+.btn {
+  border-radius: 50px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-primary {
+  background-color: var(--axel-blue);
+  border-color: var(--axel-blue);
+}
+
+.btn-primary:hover {
+  background-color: var(--axel-blue-light);
+  border-color: var(--axel-blue-light);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px rgba(14, 41, 75, 0.4);
+}
+
+[data-bs-theme="dark"] .btn-primary {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--primary-bg);
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--axel-blue-light);
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+[data-bs-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: var(--color-accent);
+}
+
+/* --- Section Spacing --- */
+section.anchor-section {
+    padding-top: 2rem;
+    margin-bottom: 3rem;
+}
